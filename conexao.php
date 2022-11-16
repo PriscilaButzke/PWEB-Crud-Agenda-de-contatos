@@ -77,8 +77,8 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "upd" && $id != "") {
         echo "Erro: " . $erro->getMessage();
     }
 }
-//delete
 
+//delete
 if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $id != "") {
 
     try {
@@ -127,7 +127,7 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $id != "") {
             <div class="mb-3 row">
                 <label for="inputEmail4" class="form-label">Nome</label>
                 <input class="form-control" style="width:300px ;" type="text" name="nome" <?php
-                                                                                            // Preenche o id no campo id com um valor "value"
+                                                                                            // Preenche o nome no campo nome com um valor "value"
                                                                                             if (isset($nome) && $nome != null || $nome != "") {
                                                                                                 echo "value=\"{$nome}\"";
                                                                                             }
@@ -164,12 +164,12 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $id != "") {
         <hr>
     </form>
 
-    <table class="table" width="100%  ">
-        <tr class="table-primary">
+    <table class="table table-striped table-hover" width="70%  ">
+        <tr class="table-dark">
             <th>Nome</th>
             <th>E-mail</th>
             <th>Celular</th>
-            <th>Ações</th>
+            <th></th>
         </tr>
 
 
@@ -181,11 +181,14 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $id != "") {
             if ($stmt->execute()) {
                 while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
                     echo "<tr>";
-                    echo "<td>" . $rs->nome . "</td><td>" . $rs->email . "</td><td>" . $rs->celular
-                        . "</td><td><center><a href=\"?act=upd&id=" . $rs->id . "\">[Alterar]</a>"
-                        . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-
-                        . "<a class='btn btn-primary' href=\"?act=del&id=" . $rs->id . "\">[Excluir]</a></center></td>";
+                    echo "<td>" . $rs->nome . "</td>
+                        <td>" . $rs->email . "</td>
+                        <td>" . $rs->celular . "</td>
+                        <td><center>
+                        <a class='btn btn-primary' href=\"?act=upd&id=" . $rs->id . "\">Alterar</a>"
+                        . "&nbsp;"
+                        . "<a class='btn btn-primary' href=\"?act=del&id=" . $rs->id . "\">Excluir</a>
+                        </center></td>";
                     echo "</tr>";
                 }
             } else {
